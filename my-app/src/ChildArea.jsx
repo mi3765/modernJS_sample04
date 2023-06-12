@@ -1,4 +1,4 @@
-import React from "react";
+import { React, memo } from "react";
 
 const style = {
   width: "100%",
@@ -6,10 +6,12 @@ const style = {
   backgroundColor: "khaki",
 };
 
-export const ChildArea = (props) => {
-  const { open } = props;
+// コンポーネントをmemoで囲ってレンダリング負荷を抑える
+export const ChildArea = memo((props) => {
+  const { open, onClickClose } = props;
+  console.log("ChildAreaがレンダリングされた!");
 
-  const data = [...Array(2000).keys()];
+//   const data = [...Array(2000).keys()];
   // data.forEach(() => {
   //     console.log("...");
   // });
@@ -19,8 +21,9 @@ export const ChildArea = (props) => {
       {open ? (
         <div style={style}>
           <p>子コンポーネント</p>
+          <button onClick={onClickClose}>閉じる</button>
         </div>
       ) : null}
     </>
   );
-};
+});
